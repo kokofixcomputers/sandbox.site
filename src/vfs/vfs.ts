@@ -26,6 +26,19 @@ export function findNode(root: FolderNode, id: string): TreeNode | null {
   return null;
 }
 
+export function findNodeByPath(root: FolderNode, path: string): TreeNode | null {
+  const segments = path.split('/').filter(Boolean);
+  let current: TreeNode = root;
+  for (const segment of segments) {
+    if (!isFolder(current)) return null;
+    const children: TreeNode[] = current.children;
+    const next: TreeNode | undefined = children.find((c) => c.name === segment);
+    if (!next) return null;
+    current = next;
+  }
+  return current;
+}
+
 export function findParent(root: FolderNode, id: string): FolderNode | null {
   for (const child of root.children) {
     if (child.id === id) return root;

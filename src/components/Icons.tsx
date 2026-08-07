@@ -170,6 +170,15 @@ export function IconDesktop(props: IconProps) {
   );
 }
 
+export function IconTerminal(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="m7 9 4 3-4 3M13 15h4" />
+    </svg>
+  );
+}
+
 export function IconSplit(props: IconProps) {
   return (
     <svg {...base} {...props}>

@@ -241,6 +241,36 @@
   box-shadow: 0 2px 14px rgba(198, 255, 94, 0.3);
 }
 
+/* ---------- Terminal toggle ---------- */
+.terminal-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 7px 14px;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 11.5px;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  background: var(--bg-void);
+  color: var(--text-dim);
+  transition: all 0.15s ease;
+}
+
+.terminal-toggle-btn:hover {
+  color: var(--text);
+  border-color: var(--violet);
+}
+
+.terminal-toggle-btn.active {
+  color: var(--lime);
+  border-color: var(--lime);
+  background: rgba(198, 255, 94, 0.08);
+  box-shadow: 0 0 14px rgba(198, 255, 94, 0.15);
+}
+
 /* ---------- Body layout ---------- */
 .app-body {
   flex: 1;
@@ -250,11 +280,20 @@
   z-index: 1;
 }
 
+.workspace {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
 .main-panel {
   flex: 1;
   display: flex;
   flex-direction: column;
   min-width: 0;
+  min-height: 0;
   background: var(--bg-tab);
 }
 
@@ -272,7 +311,26 @@
 }
 
 .split-pane-editor {
-  border-right: 1px solid var(--border);
+  border-right: none;
+}
+
+.split-drag-handle-v {
+  width: 6px;
+  flex-shrink: 0;
+  cursor: col-resize;
+  background: var(--border);
+  position: relative;
+}
+
+.split-drag-handle-v:hover,
+.split-drag-handle-v:active {
+  background: var(--violet);
+}
+
+.split-drag-handle-v::after {
+  content: '';
+  position: absolute;
+  inset: 0 -3px;
 }
 
 /* ---------- Sidebar ---------- */
@@ -751,4 +809,141 @@
 .preview-resize-handle:hover::after {
   opacity: 1;
   box-shadow: 0 0 10px rgba(124, 92, 255, 0.6);
+}
+
+/* ---------- Linux terminal ---------- */
+.terminal-drag-handle-h {
+  height: 6px;
+  flex-shrink: 0;
+  cursor: row-resize;
+  background: var(--border);
+  position: relative;
+}
+
+.terminal-drag-handle-h:hover,
+.terminal-drag-handle-h:active {
+  background: var(--violet);
+}
+
+.terminal-drag-handle-h::after {
+  content: '';
+  position: absolute;
+  inset: -3px 0;
+}
+
+.terminal-host {
+  display: flex;
+  flex-shrink: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+
+.terminal-host-collapsed {
+  border-top: none;
+}
+
+.linux-terminal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: #000;
+}
+
+.terminal-bar {
+  flex-shrink: 0;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border);
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  color: var(--text-dim);
+  font-family: 'Unbounded', sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.terminal-bar:hover {
+  color: var(--text);
+}
+
+.terminal-bar-chevron {
+  margin-left: auto;
+  transition: transform 0.15s ease;
+  transform: rotate(180deg);
+}
+
+.terminal-bar-chevron.open {
+  transform: rotate(0deg);
+}
+
+.linux-terminal-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 14px;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.linux-status {
+  font-size: 11.5px;
+  color: var(--text-dim);
+  letter-spacing: 0.2px;
+}
+
+.linux-status-booting,
+.linux-status-mounting {
+  color: var(--violet);
+}
+
+.linux-status-ready {
+  color: var(--lime);
+}
+
+.linux-status-error {
+  color: var(--pink);
+}
+
+.linux-terminal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.linux-autosync-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-dim);
+  cursor: pointer;
+  user-select: none;
+}
+
+.linux-autosync-toggle input {
+  accent-color: var(--lime);
+}
+
+.linux-terminal-screen {
+  flex: 1;
+  min-height: 0;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.linux-terminal-screen .xterm {
+  height: 100%;
 }
